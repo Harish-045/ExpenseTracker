@@ -5,10 +5,12 @@ import com.expense.entity.Budget;
 import com.expense.repository.BudgetRepository;
 import com.expense.repository.ExpenseRepository;
 import lombok.RequiredArgsConstructor;
+import com.expense.dto.DashboardResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -70,5 +72,33 @@ public class AnalyticsService {
                 expenseRepository.getTotalExpense();
 
         return budget.getAmount() - expense;
+    }
+    public DashboardResponse getDashboardData() {
+
+        Double total = expenseRepository.getTotalExpense();
+
+        List<Map<String, Object>> categoryData =
+                expenseRepository.getCategoryWiseExpense()
+                        .stream()
+                        .map(obj -> Map.of(
+                                "category", obj[0],
+                                "amount", obj[1]
+                        ))
+                        .toList();
+
+        List<Map<String, Object>> monthlyData =
+                expenseRepository.getMonthlyExpense()
+                        .stream()
+                        .map(obj -> Map.of(
+                                "month", obj[0],
+                                "amount", obj[1]
+                        ))
+                        .toList();
+
+        return new DashboardResponse(
+                total,
+                categoryData,
+                monthlyData
+        );
     }
 }

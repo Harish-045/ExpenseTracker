@@ -3,6 +3,8 @@ package com.expense.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "expenses")
 @Data
@@ -19,5 +21,11 @@ public class Expense {
     private double amount;
     private String category;
     private String description;
-
+    private LocalDate date;
+    @PrePersist
+    public void prePersist() {
+        this.date = LocalDate.now();
+    }
 }
+
+
