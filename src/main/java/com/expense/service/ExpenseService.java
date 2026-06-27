@@ -2,6 +2,8 @@ package com.expense.service;
 
 import com.expense.dto.ExpenseRequest;
 import com.expense.entity.Expense;
+
+import com.expense.exception.ExpenseNotFoundException;
 import com.expense.repository.ExpenseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -36,10 +38,10 @@ public class ExpenseService {
 
     public Expense updateExpense(Long id,
                                  ExpenseRequest request) {
-
-        Expense expense =
-                expenseRepository.findById(id)
-                        .orElseThrow();
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow(() ->
+                        new ExpenseNotFoundException(
+                                "Expense not found with id: " + id));
 
         expense.setTitle(request.getTitle());
         expense.setAmount(request.getAmount());
@@ -50,26 +52,74 @@ public class ExpenseService {
     }
 
     public void deleteExpense(Long id) {
-        expenseRepository.deleteById(id);
+
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow(() ->
+                        new ExpenseNotFoundException(
+                                "Expense not found with id: " + id));
+
+        expenseRepository.delete(expense);
     }
 
     public Page<Expense> getExpenses(int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable =
+                PageRequest.of(page, size);
 
-        return expenseRepository.findAll(pageable);
+        Page<Expense> expenses =
+                expenseRepository.findAll(pageable);
+
+        if(expenses.isEmpty()) {
+            throw new ExpenseNotFoundException(
+                    "No expenses found");
+        }
+
+        return expenses;
     }
     public List<Expense> getExpensesSorted(String field) {
 
-        return expenseRepository.findAll(
-                Sort.by(Sort.Direction.ASC, field)
-        );
+        List<Expense> expenses =
+                expenseRepository.findAll(
+                        Sort.by(field));
+
+        if(expenses.isEmpty()) {
+            throw new ExpenseNotFoundException(
+                    "No expenses found");
+        }
+
+        return expenses;
     }
     public List<Expense> getByCategory(String category) {
-        return expenseRepository.findByCategory(category);
+
+        List<Expense> expenses =
+                expenseRepository.findByCategory(category);
+
+        if(expenses.isEmpty()) {
+            throw new ExpenseNotFoundException(
+                    "No expenses found for category: " + category);
+        }
+
+        return expenses;
     }
     public List<Expense> searchExpense(String title) {
-        return expenseRepository
-                .findByTitleContainingIgnoreCase(title);
+
+        List<Expense> expenses =
+                expenseRepository
+                        .findByTitleContainingIgnoreCase(title);
+
+        if(expenses.isEmpty()) {
+            throw new ExpenseNotFoundException(
+                    "No expenses found");
+        }
+
+        return expenses;
     }
-}
+    public Expense getExpenseById(Long id) {
+
+        return expenseRepository.findById(id)
+                .orElseThrow(() ->
+                        new ExpenseNotFoundException(
+                                "Expense not found with id : " + id
+                        ));
+    }
+   }

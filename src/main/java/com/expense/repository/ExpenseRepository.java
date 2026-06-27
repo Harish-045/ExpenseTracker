@@ -21,4 +21,5 @@ public interface ExpenseRepository extends JpaRepository<Expense,Long> {
     Double getTotalExpense();
     List<Expense> findByCategory(String category);
     List<Expense> findByTitleContainingIgnoreCase(String title);
+
 }

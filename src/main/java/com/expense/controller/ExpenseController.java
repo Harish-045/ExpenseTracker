@@ -74,4 +74,12 @@ public class ExpenseController {
                 expenseService.searchExpense(keyword)
         );
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<Expense> getExpenseById(
+            @PathVariable Long id) {
+
+        return ResponseEntity.ok(
+                expenseService.getExpenseById(id)
+        );
+    }
 }
