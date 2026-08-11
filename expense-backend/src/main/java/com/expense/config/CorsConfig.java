@@ -16,42 +16,38 @@ public class CorsConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // React frontend URL
-        configuration.setAllowedOrigins(
-                List.of("http://localhost:5173")
-        );
+        // Local + EC2 frontend URLs
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:5173",
+                "http://localhost",
+                "http://localhost:80",
+                "http://13.200.243.91"
+        ));
 
         // Allowed HTTP methods
-        configuration.setAllowedMethods(
-                List.of(
-                        "GET",
-                        "POST",
-                        "PUT",
-                        "DELETE",
-                        "OPTIONS"
-                )
-        );
+        configuration.setAllowedMethods(List.of(
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "OPTIONS"
+        ));
 
         // Allow all headers
-        configuration.setAllowedHeaders(
-                List.of("*")
-        );
+        configuration.setAllowedHeaders(List.of("*"));
 
-        // Allow Authorization header (JWT)
-        configuration.setExposedHeaders(
-                List.of("Authorization")
-        );
+        // Expose JWT Authorization header
+        configuration.setExposedHeaders(List.of("Authorization"));
 
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
 
-        source.registerCorsConfiguration(
-                "/**",
-                configuration
-        );
+        source.registerCorsConfiguration("/**", configuration);
 
         return source;
     }
 }
+```
+
