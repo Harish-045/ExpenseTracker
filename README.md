@@ -14,7 +14,7 @@ The application allows users to manage their daily expenses, upload and view rec
 http://13.234.67.184
 
 **Backend API:**  
-http://13.234.67.184:8080/api
+http://13.234.67.184:8080/swagger-ui/index.html
 
 ---
 
