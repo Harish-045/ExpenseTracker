@@ -31,3 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+# User uploaded files
+uploads/
+*/uploads/
+
+# Environment files
+.env
+*.env
+
+# Build files
+node_modules/
+dist/
+target/
+
+# Logs
+*.log
