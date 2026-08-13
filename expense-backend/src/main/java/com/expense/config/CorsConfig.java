@@ -11,47 +11,39 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+        @Bean
+        public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration configuration = new CorsConfiguration();
+                CorsConfiguration configuration = new CorsConfiguration();
 
-        // React frontend URL
-        configuration.setAllowedOrigins(
-                List.of("http://localhost:5173")
-        );
+                // Keep existing Vite URL + add Docker frontend URL
+                configuration.setAllowedOrigins(List.of(
+                                "http://localhost:5173",
+                                "http://localhost",
+                                "http://localhost:80",
+                                "http://13.234.67.184",
+                                "http://13.234.67.184:80"));
 
-        // Allowed HTTP methods
-        configuration.setAllowedMethods(
-                List.of(
-                        "GET",
-                        "POST",
-                        "PUT",
-                        "DELETE",
-                        "OPTIONS"
-                )
-        );
+                // Allowed HTTP methods
+                configuration.setAllowedMethods(List.of(
+                                "GET",
+                                "POST",
+                                "PUT",
+                                "DELETE",
+                                "OPTIONS"));
 
-        // Allow all headers
-        configuration.setAllowedHeaders(
-                List.of("*")
-        );
+                // Allow all headers
+                configuration.setAllowedHeaders(List.of("*"));
 
-        // Allow Authorization header (JWT)
-        configuration.setExposedHeaders(
-                List.of("Authorization")
-        );
+                // Expose JWT Authorization header
+                configuration.setExposedHeaders(List.of("Authorization"));
 
-        configuration.setAllowCredentials(true);
+                configuration.setAllowCredentials(true);
 
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
+                UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
-        source.registerCorsConfiguration(
-                "/**",
-                configuration
-        );
+                source.registerCorsConfiguration("/**", configuration);
 
-        return source;
-    }
+                return source;
+        }
 }

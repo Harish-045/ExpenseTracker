@@ -1,74 +1,53 @@
-import {
+import "../../styles/dashboard.css";
 
-Paper,
+function RecentExpenses({ expenses }) {
 
-Typography,
+    return (
 
-Divider,
+        <div className="table-card">
 
-List,
+            <h3>Recent Expenses</h3>
 
-ListItem,
+            <table className="expense-table">
 
-ListItemText
+                <thead>
 
-} from "@mui/material";
+                <tr>
 
-function RecentExpenses(){
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Amount</th>
 
-return(
+                </tr>
 
-<Paper
+                </thead>
 
-elevation={3}
+                <tbody>
 
-sx={{
+                {expenses.map((expense) => (
 
-mt:4,
+                    <tr key={expense.id}>
 
-p:3,
+                        <td>{expense.title}</td>
 
-borderRadius:4
+                        <td>{expense.category}</td>
 
-}}
+                        <td>{expense.date}</td>
 
->
+                        <td>₹ {expense.amount}</td>
 
-<Typography
+                    </tr>
 
-variant="h6"
+                ))}
 
-fontWeight="bold"
+                </tbody>
 
-mb={2}
+            </table>
 
->
+        </div>
 
-Recent Expenses
-
-</Typography>
-
-<List>
-
-<ListItem>
-
-<ListItemText
-
-primary="Coming in Phase 6"
-
-secondary="Professional Expense Table"
-
-/>
-
-</ListItem>
-
-<Divider/>
-
-</List>
-
-</Paper>
-
-);
+    );
 
 }
 

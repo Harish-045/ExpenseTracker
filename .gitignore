@@ -1,8 +1,8 @@
 HELP.md
 target/
-.mvn/wrapper/maven-wrapper.jar
-!src/main/**/target/
-!src/test/**/target/
+expense-backend/.mvn/wrapper/maven-wrapper.jar
+!expense-backend/src/main/**/target/
+!expense-backend/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -26,8 +26,8 @@ target/
 /nbdist/
 /.nb-gradle/
 build/
-!src/main/**/build/
-!src/test/**/build/
+!expense-backend/src/main/**/build/
+!expense-backend/src/test/**/build/
 
 ### VS Code ###
 .vscode/

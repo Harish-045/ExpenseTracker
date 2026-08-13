@@ -1,67 +1,17 @@
-import {
-    Card,
-    CardContent,
-    Typography,
-    Box
-} from "@mui/material";
 
-function StatCard({
-    title,
-    value,
-    icon,
-    color
-}) {
+import "../../styles/dashboard.css";
+
+function StatCard({ title, value }) {
 
     return (
 
-        <Card
-            elevation={4}
-            sx={{
-                borderRadius: 3,
-                height: 150,
-                transition: ".3s",
-                "&:hover": {
-                    transform: "translateY(-5px)",
-                    boxShadow: 8
-                }
-            }}
-        >
+        <div className="stat-card">
 
-            <CardContent>
+            <h3>{title}</h3>
 
-                <Box
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                >
+            <h2>{value}</h2>
 
-                    <Box>
-
-                        <Typography
-                            variant="subtitle1"
-                            color="text.secondary"
-                        >
-                            {title}
-                        </Typography>
-
-                        <Typography
-                            variant="h4"
-                            fontWeight="bold"
-                            color={color}
-                            mt={2}
-                        >
-                            {value}
-                        </Typography>
-
-                    </Box>
-
-                    {icon}
-
-                </Box>
-
-            </CardContent>
-
-        </Card>
+        </div>
 
     );
 

@@ -1,95 +1,55 @@
 import {
-
     LineChart,
     Line,
+    CartesianGrid,
     XAxis,
     YAxis,
     Tooltip,
     ResponsiveContainer,
-    CartesianGrid
-
 } from "recharts";
-
-import {
-
-    Card,
-    CardContent,
-    Typography
-
-} from "@mui/material";
 
 function ExpenseLineChart({ data }) {
 
+    const chartData = Object.entries(data || {}).map(
+        ([month, expense]) => ({
+            month,
+            expense,
+        })
+    );
+
     return (
 
-        <Card
-            elevation={5}
-            sx={{
-                borderRadius:3,
-                height:420
-            }}
-        >
+        <div className="chart-card">
 
-            <CardContent>
+            <h3>Monthly Expenses</h3>
 
-                <Typography
-                    variant="h6"
-                    mb={2}
-                    fontWeight="bold"
-                >
+            <ResponsiveContainer
+                width="100%"
+                height={300}
+            >
 
-                    Monthly Expense Trend
+                <LineChart data={chartData}>
 
-                </Typography>
+                    <CartesianGrid strokeDasharray="3 3" />
 
-                <ResponsiveContainer
-                    width="100%"
-                    height={320}
-                >
+                    <XAxis dataKey="month" />
 
-                    <LineChart
-                        data={data}
-                    >
+                    <YAxis />
 
-                        <CartesianGrid
-                            strokeDasharray="5 5"
-                        />
+                    <Tooltip />
 
-                        <XAxis
-                            dataKey="month"
-                        />
+                    <Line
+                        type="monotone"
+                        dataKey="expense"
+                        stroke="#2563EB"
+                        strokeWidth={3}
+                    />
 
-                        <YAxis/>
+                </LineChart>
 
-                        <Tooltip/>
+            </ResponsiveContainer>
 
-                        <Line
-
-                            type="monotone"
-
-                            dataKey="amount"
-
-                            stroke="#1976d2"
-
-                            strokeWidth={4}
-
-                            dot={{
-                                r:6
-                            }}
-
-                            activeDot={{
-                                r:9
-                            }}
-
-                        />
-
-                    </LineChart>
-
-                </ResponsiveContainer>
-
-            </CardContent>
-
-        </Card>
+        </div>
 
     );
 

@@ -151,8 +151,8 @@
                         </goals>
                         <configuration>
                             <sourceDirs>
-                                <sourceDir>expense-backend/src/main/java</sourceDir>
-                                <sourceDir>target/generated-sources/annotations</sourceDir>
+                                <sourceDir>src/main/java</sourceDir>
+                                <sourceDir>../target/generated-sources/annotations</sourceDir>
                             </sourceDirs>
                         </configuration>
                     </execution>
@@ -164,8 +164,8 @@
                         </goals>
                         <configuration>
                             <sourceDirs>
-                                <sourceDir>expense-backend/src/test/java</sourceDir>
-                                <sourceDir>target/generated-test-sources/test-annotations</sourceDir>
+                                <sourceDir>src/test/java</sourceDir>
+                                <sourceDir>../target/generated-test-sources/test-annotations</sourceDir>
                             </sourceDirs>
                         </configuration>
                     </execution>

@@ -87,4 +87,46 @@ public class EmailService {
                             + e.getMessage());
         }
     }
+
+    public void sendPasswordResetEmail(
+            String to,
+            String resetLink) {
+
+        try {
+
+            SimpleMailMessage message =
+                    new SimpleMailMessage();
+
+            message.setTo(to);
+
+            message.setSubject(
+                    "ExpenseWise - Reset Your Password");
+
+            message.setText(
+                    "Hello,\n\n" +
+                    "We received a request to reset your ExpenseWise password.\n\n" +
+                    "Click the link below to reset your password:\n\n" +
+                    resetLink + "\n\n" +
+                    "This link will expire in 15 minutes.\n\n" +
+                    "If you did not request a password reset, please ignore this email.\n\n" +
+                    "Thanks,\n" +
+                    "ExpenseWise Team"
+            );
+
+            mailSender.send(message);
+
+            System.out.println(
+                    "Password reset email sent to " + to);
+
+        } catch (Exception e) {
+
+            System.out.println(
+                    "Failed to send password reset email: "
+                            + e.getMessage());
+
+            throw new RuntimeException(
+                    "Unable to send password reset email");
+        }
+    }
+
 }

@@ -1,0 +1,55 @@
+:root{
+    --bg:#f5f7fb;
+    --card:#ffffff;
+    --text:#111827;
+    --text-secondary:#6b7280;
+    --border:#e5e7eb;
+}
+
+body[data-theme="dark"]{
+    --bg:#111827;
+    --card:#1f2937;
+    --text:#f9fafb;
+    --text-secondary:#d1d5db;
+    --border:#374151;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    transition:background .3s,color .3s;
+    font-family:Arial,sans-serif;
+}
+/* Smooth UI */
+
+*{
+    transition:
+        background-color .25s ease,
+        color .25s ease,
+        border-color .25s ease;
+}
+
+/* Better scrolling */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+    background:var(--bg);
+}
+
+::-webkit-scrollbar-thumb{
+    background:#2563EB;
+    border-radius:999px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#1D4ED8;
+}

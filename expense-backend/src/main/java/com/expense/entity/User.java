@@ -22,11 +22,15 @@ public class User implements UserDetails {
     private Long id;
 
     private String name;
+     
 
     @Column(unique = true)
     private String email;
 
     private String password;
+    private String resetToken;
+
+    private java.time.LocalDateTime resetTokenExpiry;
     private String profileImage;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
