@@ -11,10 +11,10 @@ The application allows users to manage their daily expenses, upload and view rec
 ## Live Application
 
 **Frontend:**  
-http://13.200.243.91
+http://13.234.67.184
 
 **Backend API:**  
-http://13.200.243.91:8080/api
+http://13.234.67.184:8080/api
 
 ---
 
